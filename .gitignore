@@ -21,6 +21,9 @@ Desktop.ini
 
 # Eclipse
 
+# Java
+target
+
 # Python:
 *.py[cod]
 *.so
@@ -31,3 +34,4 @@ build
 
 # Other:
 *.bak
+*.log
