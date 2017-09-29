@@ -19,6 +19,8 @@ Desktop.ini
 .idea
 *.iml
 
+# Eclipse
+
 # Python:
 *.py[cod]
 *.so
