@@ -1,3 +1,12 @@
+#### EXAMPLE
+# .html  : ignore specific file
+# *.html : ignore all html files
+# !a.html: except a.html
+# html   : ignore *.html and html folders
+# !html/ : don't ignore html folders, i.e. only ignore *.html
+# html/  : ignore html folders
+####
+
 # Windows:
 Thumbs.db
 ehthumbs.db
@@ -7,7 +16,8 @@ Desktop.ini
 .DS_Store
 
 # Intellij
-
+.idea
+*.iml
 
 # Python:
 *.py[cod]
@@ -18,4 +28,4 @@ dist
 build
 
 # Other:
-.bak
+*.bak
