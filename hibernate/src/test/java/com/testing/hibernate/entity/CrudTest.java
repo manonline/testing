@@ -22,7 +22,7 @@ public class CrudTest {
 
     @BeforeClass
     public static void setup() {
-        logger.info("Setup for Test {} ...", EntityTest.class);
+        logger.info("Setup for Test {} ...", CrudTest.class);
 
         // enable remote access to H2 Server
         h2Server = TestUtil.startTcpServerForH2(9092);
@@ -31,7 +31,7 @@ public class CrudTest {
 
     @AfterClass
     public static void cleanup() {
-        logger.info("Cleanup for Test {}", EntityTest.class);
+        logger.info("Cleanup for Test {}", CrudTest.class);
 
         // shutdown remote access to H2 Server
         if (h2Server != null) {

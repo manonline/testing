@@ -16,7 +16,7 @@ public class StateTest {
 
     @BeforeClass
     public static void setup() {
-        logger.info("Setup for Test {} ...", EntityTest.class);
+        logger.info("Setup for Test {} ...", StateTest.class);
 
         // enable remote access to H2 Server
         h2Server = TestUtil.startTcpServerForH2(9092);
@@ -25,7 +25,7 @@ public class StateTest {
 
     @AfterClass
     public static void cleanup() {
-        logger.info("Cleanup for Test {}", EntityTest.class);
+        logger.info("Cleanup for Test {}", StateTest.class);
 
         // shutdown remote access to H2 Server
         if (h2Server != null) {

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class HqlTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(EntityTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(HqlTest.class);
     private static Server h2Server = null;
     private static Server h2WebServer = null;
 
@@ -50,7 +50,7 @@ public class HqlTest {
 
     @AfterClass
     public static void cleanup() {
-        logger.info("Cleanup for Test {}", EntityTest.class);
+        logger.info("Cleanup for Test {}", HqlTest.class);
 
         // shutdown remote access to H2 Server
         if (h2Server != null) {
@@ -88,7 +88,8 @@ public class HqlTest {
         session.getTransaction().commit();
         session.close();
 
-        Assert.assertEquals(5, users.size());
+        // retrieval and testing
+        Assert.assertEquals(15, users.size());
     }
 
     @Test
@@ -102,7 +103,7 @@ public class HqlTest {
         session.getTransaction().commit();
         session.close();
 
-
+        // retrieval and testing
         for (User u : users) {
             System.out.println(u.getName());
         }
@@ -121,6 +122,7 @@ public class HqlTest {
         session.getTransaction().commit();
         session.close();
 
+        // retrieval and testing
         String name;
         int i = 0;
 
@@ -140,21 +142,40 @@ public class HqlTest {
         Query query = session.createQuery("select id, name from UserEntity where name is NOT NULL");
 
         // element in the result set is List of List of String
-        List<List<String>> userIdAndNames = (List<List<String>>) query.list();
+        List<Object[]> userIdAndNames = (List<Object[]>) query.list();
 
         session.getTransaction().commit();
         session.close();
 
-        List<String> userIdAndName;
+        // retrieval and testing
+        Object[] userIdAndName;
         int i = 0;
 
         Iterator itr = userIdAndNames.iterator();
         while (itr.hasNext()) {
-            userIdAndName = (List<String>) itr.next();
+            userIdAndName = (Object[]) itr.next();
             i++;
-            Assert.assertEquals("User" + (i * 2 - 1), userIdAndName.get(2));
-            Assert.assertEquals(10 + i, userIdAndName.get(1));
+            Assert.assertEquals(10 + (i  - 1), userIdAndName[0]);
+            Assert.assertEquals("User" + (i * 2 - 1), userIdAndName[1]);
         }
+    }
+
+    @Test
+    public void testSelectAggregation() {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("select max(id) from UserEntity where name is NOT NULL");
+
+        // element in the result set is List of List of String
+        List userIdAndNames = query.list();
+
+        session.getTransaction().commit();
+        session.close();
+
+        // retrieval and testing
+        Assert.assertEquals(1, userIdAndNames.size());
+        Assert.assertEquals(24, userIdAndNames.get(0));
     }
 
     @Test
@@ -176,5 +197,70 @@ public class HqlTest {
         for (User u : users) {
             System.out.println(u.getName());
         }
+    }
+
+    @Test
+    public void testQueryVariable() {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        int minUserId = 23;
+
+        Query query = session.createQuery("from UserEntity where id > " + minUserId);
+
+        List<User> users = (List<User>) query.list();
+
+        session.getTransaction().commit();
+        session.close();
+
+        // retrieval and testing
+        Assert.assertEquals(1, users.size());
+        Assert.assertEquals("User29", users.get(0).getName());
+    }
+
+    @Test
+    public void testQueryPreparedStatement() {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        int minUserId = 23;
+        String userName = "User29";
+
+        Query query = session.createQuery("from UserEntity where id > ? and name = ? ");
+        // argument position then value
+        query.setInteger(0, minUserId);
+        query.setString(1, userName);
+
+        List<User> users = (List<User>) query.list();
+
+        session.getTransaction().commit();
+        session.close();
+
+        // retrieval and testing
+        Assert.assertEquals(1, users.size());
+        Assert.assertEquals("User29", users.get(0).getName());
+    }
+
+    @Test
+    public void testQueryNamedPreparedStatement() {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        int minUserId = 23;
+        String userName = "User29";
+
+        Query query = session.createQuery("from UserEntity where id > :userId and name = :userName");
+        // argument name then value
+        query.setInteger("userId", minUserId);
+        query.setString("userName", userName);
+
+        List<User> users = (List<User>) query.list();
+
+        session.getTransaction().commit();
+        session.close();
+
+        // retrieval and testing
+        Assert.assertEquals(1, users.size());
+        Assert.assertEquals("User29", users.get(0).getName());
     }
 }
