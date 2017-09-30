@@ -8,6 +8,8 @@ import java.util.Date;
  */
 @Entity(name = "UserEntity")
 @Table(name = "user_info")
+@NamedQuery(name = "UserEntity.byId", query = "from UserEntity where id = :userId")
+@NamedNativeQuery(name = "UserEntity.byName", query = "select * from user_info where name = :name", resultClass = User.class)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

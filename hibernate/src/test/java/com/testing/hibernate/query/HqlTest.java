@@ -1,4 +1,4 @@
-package com.testing.hibernate.hql;
+package com.testing.hibernate.query;
 
 import com.testing.hibernate.entity.EntityTest;
 import com.testing.hibernate.entity.User;
