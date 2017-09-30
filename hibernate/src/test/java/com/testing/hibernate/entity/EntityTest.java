@@ -17,6 +17,7 @@ import java.util.List;
  * Created by davidqi on 9/25/17.
  */
 public class EntityTest {
+
     private static final Logger logger = LoggerFactory.getLogger(EntityTest.class);
     private static Server h2Server = null;
     private static Server h2WebServer = null;
@@ -174,34 +175,6 @@ public class EntityTest {
     }
 
     @Test
-    public void testCascade() {
-        logger.info("Testing Started for {}", UserOneToManyVehicle.class);
-        UserOneToManyVehicle user = new UserOneToManyVehicle();
-        user.setName("David Qi");
-        user.setHobbie("Basketball");
-        user.setDob(new Date("1980/01/12"));
-
-        Vehicle vehicle1 = new Vehicle();
-        Vehicle vehicle2 = new Vehicle();
-        vehicle1.setVehicleName("Honda");
-        vehicle2.setVehicleName("BMW");
-
-        // add the relationship
-        user.getVehicles().add(vehicle1);
-        user.getVehicles().add(vehicle2);
-
-        Session session = HibernateUtil.getSession();
-        session.beginTransaction();
-        // not need to save the vehicles manually, since Cascade is specified
-        //session.save(vehicle1);
-        //session.save(vehicle2);
-        // use persist instead of save()
-        session.persist(user);
-        session.getTransaction().commit();
-        session.close();
-    }
-
-    @Test
     public void testManyToOneSimple() {
         logger.info("Testing Started for {}", VehicleManyToOneUser.class);
         User user = new User();
@@ -293,6 +266,34 @@ public class EntityTest {
         session.save(vehicleManyToManyUser1);
         session.save(vehicleManyToManyUser2);
 
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Test
+    public void testCascade() {
+        logger.info("Testing Started for {}", UserOneToManyVehicle.class);
+        UserOneToManyVehicle user = new UserOneToManyVehicle();
+        user.setName("David Qi");
+        user.setHobbie("Basketball");
+        user.setDob(new Date("1980/01/12"));
+
+        Vehicle vehicle1 = new Vehicle();
+        Vehicle vehicle2 = new Vehicle();
+        vehicle1.setVehicleName("Honda");
+        vehicle2.setVehicleName("BMW");
+
+        // add the relationship
+        user.getVehicles().add(vehicle1);
+        user.getVehicles().add(vehicle2);
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+        // not need to save the vehicles manually, since Cascade is specified
+        //session.save(vehicle1);
+        //session.save(vehicle2);
+        // use persist instead of save()
+        session.persist(user);
         session.getTransaction().commit();
         session.close();
     }

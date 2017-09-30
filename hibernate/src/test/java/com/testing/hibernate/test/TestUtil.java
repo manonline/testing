@@ -10,6 +10,7 @@ import java.sql.SQLException;
  * Created by davidqi on 9/28/17.
  */
 public class TestUtil {
+
     private static final Logger logger = LoggerFactory.getLogger(TestUtil.class);
 
     public static Server startTcpServerForH2(int tcpPort) {

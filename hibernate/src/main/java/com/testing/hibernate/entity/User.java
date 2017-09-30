@@ -6,14 +6,14 @@ import java.util.Date;
 /**
  * Created by davidqi on 9/25/17.
  */
-@Entity
-@Table(name="user_info")
+@Entity(name = "UserEntity")
+@Table(name = "user_info")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
     private String name;
-    @Temporal(value=TemporalType.TIMESTAMP)
+    @Temporal(value = TemporalType.TIMESTAMP)
     private Date dob;
     @Transient
     private String hobbie;
