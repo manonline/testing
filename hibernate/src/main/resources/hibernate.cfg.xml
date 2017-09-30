@@ -41,7 +41,7 @@
         <mapping class="com.testing.hibernate.entity.UserManyToManyVehicle"/>
         <mapping class="com.testing.hibernate.entity.VehicleManyToManyUser"/>
 
-        <mapping class="com.testing.hibernate.entity.child.Vehicle"/>
+        <mapping class="com.testing.hibernate.entity.Vehicle"/>
 
     </session-factory>
 </hibernate-configuration>

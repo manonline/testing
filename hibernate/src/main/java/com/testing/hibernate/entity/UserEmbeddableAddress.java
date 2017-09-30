@@ -1,6 +1,6 @@
 package com.testing.hibernate.entity;
 
-import com.testing.hibernate.entity.child.Address;
+import com.testing.hibernate.entity.valueobject.Address;
 
 import javax.persistence.*;
 import java.util.Date;

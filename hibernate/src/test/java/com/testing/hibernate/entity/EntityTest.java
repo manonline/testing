@@ -1,7 +1,6 @@
 package com.testing.hibernate.entity;
 
-import com.testing.hibernate.entity.child.Address;
-import com.testing.hibernate.entity.child.Vehicle;
+import com.testing.hibernate.entity.valueobject.Address;
 import com.testing.hibernate.test.TestUtil;
 import com.testing.hibernate.util.HibernateUtil;
 import org.h2.tools.Server;
@@ -298,37 +297,28 @@ public class EntityTest {
         session.close();
     }
 
-    //@Test
-    /*public void testNotFound() {
+    @Test
+    public void testInheritance() {
         logger.info("Testing Started for {}", VehicleManyToOneUser.class);
+        Vehicle vehicle = new Vehicle();
+        vehicle.setVehicleName("Car");
 
-        User user = new User();
-        user.setName("David Qi");
-        user.setHobbie("Basketball");
-        user.setDob(new Date("1980/01/12"));
+        TwoWheeler twoWheeler = new TwoWheeler();
+        twoWheeler.setVehicleName("Two Wheeler");
+        twoWheeler.setSteeringHandle("Bike Steering Handle");
 
-
-        VehicleManyToOneUser vehicleManyToOneUser1 = new VehicleManyToOneUser();
-        //VehicleManyToOneUser vehicleManyToOneUser2 = new VehicleManyToOneUser();
-        vehicleManyToOneUser1.setVehicleName("Honda");
-        //vehicleManyToOneUser2.setVehicleName("BM2");
-
-        // add the relationship
-        //vehicleManyToOneUser1.setUser(user);
+        FourWheeler fourWheeler = new FourWheeler();
+        fourWheeler.setVehicleName("Four Wheeler");
+        fourWheeler.setSteeringWheel("Car Steering Wheel");
 
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-        //session.save(user);
-        session.save(vehicleManyToOneUser1);
-        //session.save(vehicleManyToOneUser2);
+
+        session.save(vehicle);
+        session.save(twoWheeler);
+        session.save(fourWheeler);
+
         session.getTransaction().commit();
-
-        VehicleManyToOneUser vehicleManyToOneUserTest =
-                (VehicleManyToOneUser) session.get(VehicleManyToOneUser.class, 10);
-        vehicleManyToOneUserTest.getId();
-        User user1 = vehicleManyToOneUserTest.getUser();
-        user1.getId();
-
         session.close();
-    }*/
+    }
 }

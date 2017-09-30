@@ -1,4 +1,4 @@
-package com.testing.hibernate.entity.child;
+package com.testing.hibernate.entity.valueobject;
 
 import javax.persistence.Embeddable;
 

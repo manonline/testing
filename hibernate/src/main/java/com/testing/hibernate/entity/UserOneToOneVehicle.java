@@ -1,7 +1,5 @@
 package com.testing.hibernate.entity;
 
-import com.testing.hibernate.entity.child.Vehicle;
-
 import javax.persistence.*;
 import java.util.Date;
 

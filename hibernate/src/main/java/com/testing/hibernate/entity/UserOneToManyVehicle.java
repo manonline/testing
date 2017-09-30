@@ -1,7 +1,5 @@
 package com.testing.hibernate.entity;
 
-import com.testing.hibernate.entity.child.Vehicle;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +22,8 @@ public class UserOneToManyVehicle {
 
     // test only one direction, i.e. no @ManyToOne from the other side
     // @JoinTable to manage the attributes of the linkage table
+    // Cascade to enable auto-save associated objects is mapping is set,
+    // i.e. user.saveVehicles() is called.
     @OneToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "one_to_many",
             joinColumns = @JoinColumn(name = "user_pk"),

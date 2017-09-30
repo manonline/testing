@@ -43,7 +43,9 @@
         <mapping class="com.testing.hibernate.entity.UserManyToManyVehicle"/>
         <mapping class="com.testing.hibernate.entity.VehicleManyToManyUser"/>
 
-        <mapping class="com.testing.hibernate.entity.child.Vehicle"/>
+        <mapping class="com.testing.hibernate.entity.Vehicle"/>
+        <mapping class="com.testing.hibernate.entity.TwoWheeler"/>
+        <mapping class="com.testing.hibernate.entity.FourWheeler"/>
 
     </session-factory>
 </hibernate-configuration>

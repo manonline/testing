@@ -1,6 +1,6 @@
 package com.testing.hibernate.entity;
 
-import com.testing.hibernate.entity.child.Address;
+import com.testing.hibernate.entity.valueobject.Address;
 import org.hibernate.annotations.CollectionId;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
