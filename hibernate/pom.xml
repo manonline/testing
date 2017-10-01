@@ -56,6 +56,12 @@
             <artifactId>dom4j</artifactId>
             <version>1.6.1</version>
         </dependency>
+        <!-- ehcahce as second level cache -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-ehcache</artifactId>
+            <version>3.6.10.Final</version>
+        </dependency>
 
         <!-- postgresql jdbc -->
         <dependency>

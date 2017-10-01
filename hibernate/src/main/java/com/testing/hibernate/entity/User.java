@@ -1,5 +1,7 @@
 package com.testing.hibernate.entity;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,6 +10,12 @@ import java.util.Date;
  */
 @Entity(name = "UserEntity")
 @Table(name = "user_info")
+@Cacheable
+// READ_ONLY: assume application only read the data from database
+// NONSTRICTLY_READ_WRITE:
+// READ_WRITE:
+// TRANSACTIONAL:
+@org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.READ_ONLY)
 @NamedQuery(name = "UserEntity.byId", query = "from UserEntity where id = :userId")
 @NamedNativeQuery(name = "UserEntity.byName", query = "select * from user_info where name = :name", resultClass = User.class)
 public class User {
