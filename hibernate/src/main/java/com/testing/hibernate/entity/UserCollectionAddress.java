@@ -32,7 +32,7 @@ public class UserCollectionAddress {
     // name of the table and associated joint column
     @JoinTable(name = "address_for_user", joinColumns = @JoinColumn(name = "user_id"))
     @GenericGenerator(name = "hilo-gen", strategy = "hilo")
-    // adding a PK for the adress recrod in the new table
+    // adding a PK for the address record in the new table
     @CollectionId(columns = {@Column(name = "address_id")}, generator = "hilo-gen", type = @Type(type = "long"))
     private Collection<Address> address = new ArrayList<Address>();
 

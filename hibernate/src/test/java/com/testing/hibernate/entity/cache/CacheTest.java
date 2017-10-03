@@ -12,6 +12,9 @@ import org.junit.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Iterator;
+import java.util.List;
+
 public class CacheTest {
 
     private static final Logger logger = LoggerFactory.getLogger(EntityTest.class);
@@ -100,6 +103,7 @@ public class CacheTest {
 
         Query query = session.createQuery("from UserEntity ");
         User user = (User) session.get(User.class, 10);
+        session.saveOrUpdate(user);
 
         session.getTransaction().commit();
         session.close();
@@ -111,5 +115,24 @@ public class CacheTest {
 
         anotherSession.getTransaction().commit();
         anotherSession.close();
+    }
+
+    @Test
+    public void testNPlus1() {
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        List<User> users = (List<User>) session.createQuery("from UserEntity")
+                .setFirstResult(0)
+                .setMaxResults(10)
+                .list();
+
+        System.out.println("Size of the List: " + users.size());
+        Iterator<User> userItr = users.iterator();
+        for(;userItr.hasNext();)
+        {
+            User user = (User) userItr.next();
+            System.out.println(user.getName());
+        }
     }
 }

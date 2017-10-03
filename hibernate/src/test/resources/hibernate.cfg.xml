@@ -44,9 +44,14 @@
         <mapping class="com.testing.hibernate.entity.UserCollectionAddress"/>
         <mapping class="com.testing.hibernate.entity.UserOneToOneVehicle"/>
         <mapping class="com.testing.hibernate.entity.UserOneToManyVehicle"/>
+        <mapping class="com.testing.hibernate.entity.UserWithUserType"/>
+
         <mapping class="com.testing.hibernate.entity.VehicleManyToOneUser"/>
         <mapping class="com.testing.hibernate.entity.UserManyToManyVehicle"/>
         <mapping class="com.testing.hibernate.entity.VehicleManyToManyUser"/>
+
+        <mapping class="com.testing.hibernate.entity.Order"/>
+        <mapping class="com.testing.hibernate.entity.OrderLine"/>
 
         <mapping class="com.testing.hibernate.entity.Vehicle"/>
         <mapping class="com.testing.hibernate.entity.TwoWheeler"/>

@@ -1,5 +1,6 @@
 package com.testing.hibernate.entity;
 
+import com.testing.hibernate.entity.type.AddressType;
 import com.testing.hibernate.entity.valueobject.Address;
 import com.testing.hibernate.test.TestUtil;
 import com.testing.hibernate.util.HibernateUtil;
@@ -289,7 +290,7 @@ public class EntityTest {
 
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
-        // not need to save the vehicles manually, since Cascade is specified
+        // no need to save the vehicles manually, since Cascade is specified
         //session.save(vehicle1);
         //session.save(vehicle2);
         // use persist instead of save()
@@ -318,6 +319,35 @@ public class EntityTest {
         session.save(vehicle);
         session.save(twoWheeler);
         session.save(fourWheeler);
+
+        session.getTransaction().commit();
+        session.close();
+    }
+
+    @Test
+    public void testCustomType() {
+        UserWithUserType user = new UserWithUserType();
+        user.setName("With New Type");
+        AddressType addressType = new AddressType();
+        addressType.setHomeAddr("Home Address");
+        addressType.setWorkAddr("Work Address");
+        user.setAddressType(addressType);
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        session.save(user);
+
+        session.getTransaction().commit();
+        session.close();
+
+        session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        UserWithUserType user2 = (UserWithUserType) session.get(UserWithUserType.class, 10);
+
+        Assert.assertEquals("Home Address", user2.getAddressType().getHomeAddr());
+        Assert.assertEquals("Work Address", user2.getAddressType().getWorkAddr());
 
         session.getTransaction().commit();
         session.close();

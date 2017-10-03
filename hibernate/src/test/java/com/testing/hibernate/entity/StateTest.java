@@ -5,14 +5,21 @@ import com.testing.hibernate.util.HibernateUtil;
 import org.h2.tools.Server;
 import org.hibernate.Session;
 import org.junit.*;
+import org.junit.rules.ExpectedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 public class StateTest {
 
     private static final Logger logger = LoggerFactory.getLogger(EntityTest.class);
     private static Server h2Server = null;
     private static Server h2WebServer = null;
+
+    @Rule
+    public ExpectedException thrown= ExpectedException.none();
 
     @BeforeClass
     public static void setup() {
@@ -118,5 +125,113 @@ public class StateTest {
 
         session.getTransaction().commit();
         session.close();
+    }
+
+    @Test
+    public void testJpaPersist() {
+        /**
+         * save()   : assign a new ID every time
+         * persist(): assign a ID only when is missing, otherwise duplciated exception
+         * update() : use existing id, if missing, exception
+         * merge()  : assign a new ID if it's missing,
+         * saveOrupdate() : use existing id, if missing, assign a new one
+         */
+        User user = new User();
+        user.setName("Transitent Name");
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        // Transient -> Persistent
+        session.persist(user);
+        System.out.println(user.getId());
+
+        // Persistent -> Detached
+        session.evict(user);
+        System.out.println(user.getId());
+
+        user.setId(0);
+
+        session.persist(user);
+
+        // PERSIST: Detached -> Exception :
+/*
+        session.persist(user);
+        System.out.println(user.getId());
+        thrown.expect(org.hibernate.PersistentObjectException);
+*/
+
+        // SAVE: Detached -> Persistent : A NEW ID
+        session.save(user);
+        System.out.println(user.getId());
+
+        session.getTransaction().commit();
+        session.close();
+
+
+    }
+
+    @Test
+    public void testFlushAndEvict() {
+        User user = new User();
+        user.setName("Transient");
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        // Transient -> Persistent
+        user.setName("Persistent");
+        session.save(user);
+
+        // Flush to Database
+        user.setName("Persistent Flush");
+        session.flush();
+
+        // Persistent -> Detached : A New ID is assigned
+        user.setName("Persistent Removed");
+        session.evict(user);
+
+        // Detached -> Persistent
+        user.setName("Reattached");
+        session.save(user);
+
+        session.beginTransaction().commit();
+        session.close();
+    }
+
+    @Test
+    public void testJpaMerge() {
+        /**
+         *
+         */
+        User user = new User();
+        user.setName("Transitent Name");
+
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        // Transient -> Persistent
+        session.persist(user);
+        System.out.println(user.getId());
+
+        // Persistent -> Detached
+        session.evict(user);
+        System.out.println(user.getId());
+
+/*        // Merge: Detached -> Persistent
+        user.setName("Detached User");
+        User mergedUser = (User) session.merge(user);*/
+
+/*
+        // Merge: Transient -> Persistent
+        User user2 = new User();
+        user.setName("User 2");
+        mergedUser = (User) session.merge(user2);
+*/
+
+        session.getTransaction().commit();
+        session.close();
+
+
     }
 }

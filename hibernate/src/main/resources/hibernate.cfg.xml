@@ -33,15 +33,22 @@
 
         <!-- XML Config : mapping resource or Annotation Config : mapping class -->
         <mapping class="com.testing.hibernate.entity.User"/>
-        <mapping class="com.testing.hibernate.entity.UserCollectionAddress"/>
         <mapping class="com.testing.hibernate.entity.UserEmbeddableAddress"/>
+        <mapping class="com.testing.hibernate.entity.UserCollectionAddress"/>
         <mapping class="com.testing.hibernate.entity.UserOneToOneVehicle"/>
         <mapping class="com.testing.hibernate.entity.UserOneToManyVehicle"/>
+        <mapping class="com.testing.hibernate.entity.UserWithUserType"/>
+
         <mapping class="com.testing.hibernate.entity.VehicleManyToOneUser"/>
         <mapping class="com.testing.hibernate.entity.UserManyToManyVehicle"/>
         <mapping class="com.testing.hibernate.entity.VehicleManyToManyUser"/>
 
+        <mapping class="com.testing.hibernate.entity.Order"/>
+        <mapping class="com.testing.hibernate.entity.OrderLine"/>
+
         <mapping class="com.testing.hibernate.entity.Vehicle"/>
+        <mapping class="com.testing.hibernate.entity.TwoWheeler"/>
+        <mapping class="com.testing.hibernate.entity.FourWheeler"/>
 
     </session-factory>
 </hibernate-configuration>

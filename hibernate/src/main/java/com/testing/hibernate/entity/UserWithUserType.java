@@ -1,27 +1,17 @@
 package com.testing.hibernate.entity;
 
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import com.testing.hibernate.entity.type.AddressType;
+import org.hibernate.annotations.Columns;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by davidqi on 9/25/17.
- */
-@Entity(name = "UserEntity")
-@Table(name = "user_info")
-@Cacheable
-// READ_ONLY: assume application only read the data from database
-// NONSTRICTLY_READ_WRITE:
-// READ_WRITE:
-// TRANSACTIONAL:
-// @org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.READ_ONLY)
-@NamedQuery(name = "UserEntity.byId",
-        query = "from UserEntity where id = :userId")
-@NamedNativeQuery(name = "UserEntity.byName",
-        query = "select * from user_info where name = :name",
-        resultClass = User.class)
-public class User {
+@Entity
+@Table(name = "user_with_user_type")
+@TypeDef(name = "AddressType", typeClass = AddressType.class)
+public class UserWithUserType {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
@@ -30,6 +20,13 @@ public class User {
     private Date dob;
     @Transient
     private String hobbie;
+
+    // @Type to specify the class (convertor) that knows how to serialize instances of another class to and from JDBC
+    @Type(type = "AddressType")
+    @Columns(columns = {
+            @Column(name = "homeAddr"),
+            @Column(name= "workAddr")})
+    private AddressType addressType;
 
     public int getId() {
         return id;
@@ -61,5 +58,14 @@ public class User {
 
     public void setHobbie(String hobbie) {
         this.hobbie = hobbie;
+    }
+
+    public void setAddressType(AddressType addressType) {
+        this.addressType = addressType;
+    }
+
+    public AddressType getAddressType() {
+
+        return addressType;
     }
 }
