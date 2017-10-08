@@ -24,6 +24,10 @@ Desktop.ini
 # Java
 target
 
+# Maven
+mvnw
+.mvn
+
 # Python:
 *.py[cod]
 *.so
