@@ -27,6 +27,8 @@ target
 # Maven
 mvnw
 .mvn
+.cmd
+
 
 # Python:
 *.py[cod]
