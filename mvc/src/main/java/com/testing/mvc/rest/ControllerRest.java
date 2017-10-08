@@ -15,7 +15,7 @@ public class ControllerRest {
      * ResponseBody to surpresse the view and handle the response body directly
      * All the @ResponseBody can be removed by using @RestController annotation on the closs
      */
-    @RequestMapping(value = "/users", method= RequestMethod.GET)
+    @RequestMapping(value = "/users1", method= RequestMethod.GET)
     public ArrayList<User> getUserList() {
         User user1 = new User();
         user1.setName("David");
@@ -30,7 +30,7 @@ public class ControllerRest {
         return userList;
     }
 
-    @RequestMapping(value = "/users/{name}", method= RequestMethod.GET)
+    @RequestMapping(value = "/users1/{name}", method= RequestMethod.GET)
     public User getUser(@PathVariable(value="name") String name) {
 
         User user = new User();

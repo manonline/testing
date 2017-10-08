@@ -12,26 +12,24 @@
 <body>
 
 <h1>Login Succeed</h1>
-<br>
-<br>
-Information Submitted:
-<br>
-${user}
-${password}
+${welcomeMsg}<br>
 
-<br>
-System Information:
-<br>
-${servertime}
+<h2>Information Submitted:</h2>
+用户名: ${user}<br>
+密码  : ${password}
+
+<h2>System Information:</h2>
+${servertime}<br>
 ${serverinstance}
 
-Pleae Fil in Additional Information:
+<h2>Submit More Info:</h2>
 
 <form action="/welcome/moreinfo" method="post">
+    <input type="text"   name="user.dob" placeholder="生日"><br>
+    <input type="text"   name="user.mobile" placeholder="手机"><br>
+    <input type="submit" value="Confirm">
+    <input type="reset"  value="Cancel">
     <input type="hidden" name="user.name" value=${user} placeholder="用户名">
-    <input type="text"   name="user.dob" placeholder="生日">
-    <input type="text"   name="user.mobile" placeholder="手机">
-    <input type="submit" value="登录">
 </form>
 
 </body>

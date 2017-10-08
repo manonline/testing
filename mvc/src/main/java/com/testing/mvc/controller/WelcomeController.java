@@ -24,8 +24,7 @@ public class WelcomeController {
 
         // populate model and return view
         ModelAndView mv = new ModelAndView("welcome");
-        mv.addObject("welcome.message", welcomeMsg);
-
+        mv.addObject("welcomeMsg", welcomeMsg);
         return mv;
     }
 
@@ -45,9 +44,9 @@ public class WelcomeController {
         return mv;
     }
 
-    @ModelAttribute
+/*    @ModelAttribute
     public void addingCommandObject(Model model) {
         model.addAttribute("servertime", System.currentTimeMillis());
         model.addAttribute("serverinstance", System.getProperty("serverInstance"));
-    }
+    }*/
 }
