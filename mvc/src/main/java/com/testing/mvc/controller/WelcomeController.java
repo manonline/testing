@@ -2,14 +2,13 @@ package com.testing.mvc.controller;
 
 import com.testing.mvc.controller.vo.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.ws.rs.Path;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/welcome")
@@ -28,8 +27,19 @@ public class WelcomeController {
         return mv;
     }
 
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public ModelAndView logout(HttpSession session) {
+
+        // return to the home page
+        ModelAndView mv = new ModelAndView("redirect:/index");
+
+        // invalidate session
+        session.invalidate();
+        return mv;
+    }
+
     @RequestMapping(value = "/moreinfo", method = RequestMethod.POST)
-    public ModelAndView welcomeName(@ModelAttribute("user") User user) {
+    public ModelAndView moreinfo(@ModelAttribute("user") User user) {
         // retrieve input data
         System.out.println(user.getName());
         System.out.println(user.getDob());
@@ -44,9 +54,11 @@ public class WelcomeController {
         return mv;
     }
 
-/*    @ModelAttribute
-    public void addingCommandObject(Model model) {
-        model.addAttribute("servertime", System.currentTimeMillis());
-        model.addAttribute("serverinstance", System.getProperty("serverInstance"));
-    }*/
+    /**
+     * @ModelAttribute
+     * public void addingCommandObject(Model model) {
+     *     model.addAttribute("servertime", System.currentTimeMillis());
+     *     model.addAttribute("serverinstance", System.getProperty("serverInstance"));
+     * }
+     */
 }

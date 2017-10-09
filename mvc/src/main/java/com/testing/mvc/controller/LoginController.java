@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-@Controller("/login")
+@Controller
+@RequestMapping("/login")
 public class LoginController {
 
     private static final int MIN_PASSWORD_LENGTH = 6;
@@ -31,6 +32,7 @@ public class LoginController {
         ModelAndView mv = new ModelAndView("redirect:/welcome");
         attributes.addFlashAttribute("user", userName);
         attributes.addFlashAttribute("password", password);
+        attributes.addAttribute("Hello", "Hello Request");
         return mv;
     }
 

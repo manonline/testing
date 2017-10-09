@@ -7,13 +7,22 @@
     <title>Welcome</title>
 </head>
 <body>
-    <h1>Request Parameter Testing</h1>
+    <h1>Test Result </h1>
+    Handler Invoked: ${method}<br>
+    Argument Passed: ${arguments}
 
-    <form action="/login" method="post">
+    <h2>Submit your Arguments</h2>
+    <h3>Submit Arguments via Path Variables</h3>
+    <a href="http://localhost:8080/test?var1=var1&var2=var2&var3=var3" name="Submit">Submit</a>
+
+    <h3>Submit Arguments via Request Parameters</h3>
+    <form action="/test" method="post">
         <input type="text" name="var1" placeholder="var1">
         <input type="text" name="var2" placeholder="var2">
         <input type="text" name="var3" placeholder="var3">
         <input type="submit" value="提交">
     </form>
+
+
 </body>
 </html>
