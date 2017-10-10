@@ -45,7 +45,7 @@ public class ProduceRestController {
 
         User user1 = new User();
         user1.setName(name);
-        user1.setHobbie("Hehe");
+        user1.setHobby("Hehe");
 
         return user;
     }

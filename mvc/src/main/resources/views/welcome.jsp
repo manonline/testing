@@ -73,12 +73,18 @@ ${serverinstance}
 
 <h2>Submit More Info:</h2>
 
-<form action="/welcome/moreinfo" method="post">
-    <input type="text"   name="user.dob" placeholder="生日"><br>
-    <input type="text"   name="user.mobile" placeholder="手机"><br>
+<form action="/welcome/detail" method="post">
+    <input type="hidden" name="user.name" value=${user} placeholder="Name">
+    <input type="text"   name="user.hobby" placeholder="Birthday"><br>
+    <input type="text"   name="user.mobile" placeholder="Birthday"><br>
+    <input type="text"   name="user.dob" placeholder="Mobile"><br>
+    <select name="user.skills" multiple>
+        <option value="Java Core">Java Core</option>
+        <option value="Spring Core">Spring Core</option>
+        <option value="Spring MVC">Java MVC</option>
+    </select>
     <input type="submit" value="Confirm">
     <input type="reset"  value="Cancel">
-    <input type="hidden" name="user.name" value=${user} placeholder="用户名">
 </form>
 
 </body>

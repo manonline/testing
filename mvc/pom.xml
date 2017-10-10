@@ -87,15 +87,11 @@
             <artifactId>logback-access</artifactId>
             <version>${logback.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>4.3.11.RELEASE</version>
-        </dependency>
     </dependencies>
 
     <build>
         <plugins>
+            <!-- compiler properties -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -105,6 +101,7 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+            <!-- war package plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
@@ -112,6 +109,12 @@
                 <configuration>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
+            </plugin>
+            <!-- maven jetty plugin for dev testing -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.4.7.v20170914</version>
             </plugin>
         </plugins>
     </build>

@@ -13,7 +13,6 @@
 <body>
 
 <h1>Welcome to Spring MVC world</h1>
-<form:errors>${error} : ${errordescription}</form:errors>
 <br>
 Please Login:
 <form action="/login" method="post">

@@ -38,7 +38,7 @@ public class WelcomeController {
         return mv;
     }
 
-    @RequestMapping(value = "/moreinfo", method = RequestMethod.POST)
+    @RequestMapping(value = "/detail", method = RequestMethod.POST)
     public ModelAndView moreinfo(@ModelAttribute("user") User user) {
         // retrieve input data
         System.out.println(user.getName());

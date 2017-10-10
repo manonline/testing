@@ -38,7 +38,7 @@ public class PlainRestController {
 
         User user = new User();
         user.setName(name);
-        user.setHobbie("Hehe");
+        user.setHobby("Hehe");
 
         return user;
     }

@@ -3,6 +3,7 @@ package com.testing.mvc.controller;
 import com.testing.mvc.controller.vo.User;
 import com.testing.mvc.controller.vo.binding.CustomNameEditor;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +19,6 @@ import java.util.Map;
 @Controller
 @RequestMapping("/")
 public class RootController {
-
 
     /**
      * Basic Controller Mapping
